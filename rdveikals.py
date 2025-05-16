@@ -14,7 +14,8 @@ data = [['Nosaukums', 'Cena EUR']]
 def get_soup(url):
     res = requests.get(url, headers=headers)
     return bs4.BeautifulSoup(res.text, 'html.parser')
-
+    
+# nolasa nosaukumus un cenas katrā lapā
 iphone_page = get_soup(main_url+'categories/lv/388/sort/5/filter/0_0_74_0/page/1/Mobilie-telefoni.html')
 iphones = iphone_page.findAll('div', class_='product__info')
 for item in iphones:
@@ -70,7 +71,8 @@ for item in iphones:
     title = item.find('h3', class_='product__title').a.get_text(separator=' ', strip=True)
     price = item.find('p', class_='price').find(text=True).strip()
     data.append([title, price])
-
+    
+# ieraksta datus excel failā
 with xlsxwriter.Workbook('rdveikalss.xlsx') as workbook:
     worksheet = workbook.add_worksheet()
 
