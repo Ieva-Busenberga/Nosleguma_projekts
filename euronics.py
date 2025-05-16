@@ -19,11 +19,11 @@ iphones = iphone_page.find_all('article', class_='product-card')
 
 
 for item in iphones:
-    # Название товара
+    # nolasa nosaukumu
     title_tag = item.find('span', class_='product-card__title')
     title = title_tag.get_text(strip=True) if title_tag else 'Nosaukums nav atrasts'
 
-    # Цена
+    # nolasa cenu
     price_tag = item.find('div', class_='price')
     if price_tag:
         parts = list(price_tag.stripped_strings)
@@ -39,7 +39,7 @@ for item in iphones:
 
     data.append([title, price])
 
-# Запись в Excel
+# Ieraksta excel failā
 with xlsxwriter.Workbook('Euronics.xlsx') as workbook:
     worksheet = workbook.add_worksheet()
     for row_num, row_data in enumerate(data):
